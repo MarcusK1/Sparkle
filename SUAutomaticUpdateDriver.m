@@ -18,6 +18,10 @@
 {
 	alert = [[SUAutomaticUpdateAlert alloc] initWithAppcastItem:updateItem host:host delegate:self];
 	
+    if (_quiet) {
+        [self automaticUpdateAlert:alert finishedWithChoice:SUInstallLaterChoice];
+        return;
+    }
 	// If the app is a menubar app or the like, we need to focus it first and alter the
 	// update prompt to behave like a normal window. Otherwise if the window were hidden
 	// there may be no way for the application to be activated to make it visible again.

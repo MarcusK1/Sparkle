@@ -22,6 +22,8 @@
 
 	NSString *customUserAgentString;
 	SUHost *host;
+    
+    BOOL _quiet;
 	IBOutlet id delegate;
 }
 
@@ -72,6 +74,9 @@
 - (void)resetUpdateCycle;
 
 - (BOOL)updateInProgress;
+
+- (void)setQuiet:(BOOL)q;
+- (BOOL)isQuiet;
 
 @end
 

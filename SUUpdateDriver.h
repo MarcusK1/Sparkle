@@ -21,6 +21,7 @@ extern NSString * const SUUpdateDriverFinishedNotification;
 	NSURL *appcastURL;
 	
 	BOOL finished;
+    BOOL _quiet;
 }
 
 - initWithUpdater:(SUUpdater *)updater;
@@ -30,6 +31,8 @@ extern NSString * const SUUpdateDriverFinishedNotification;
 - (SUHost*)host;
 - (void)setHost:(SUHost*)newHost;
 
+- (BOOL)isQuiet;
+- (void)setQuiet:(BOOL)q;
 @end
 
 #endif

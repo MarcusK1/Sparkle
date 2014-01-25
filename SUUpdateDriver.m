@@ -14,8 +14,10 @@ NSString * const SUUpdateDriverFinishedNotification = @"SUUpdateDriverFinished";
 @implementation SUUpdateDriver
 - initWithUpdater:(SUUpdater *)anUpdater
 {
-	if ((self = [super init]))
+	if ((self = [super init])) {
 		updater = anUpdater;
+        _quiet = NO;
+    }
 	return self;
 }
 
@@ -51,6 +53,16 @@ NSString * const SUUpdateDriverFinishedNotification = @"SUUpdateDriverFinished";
 {
     [host release];
     host = [newHost retain];
+}
+
+- (BOOL)isQuiet
+{
+    return _quiet;
+}
+
+- (void)setQuiet:(BOOL)q
+{
+    _quiet = q;
 }
 
 @end

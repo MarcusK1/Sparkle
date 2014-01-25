@@ -77,6 +77,8 @@ static NSString * const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefault
 	}
 	else if (self)
 	{
+        _quiet = NO;
+        
 		if (sharedUpdaters == nil)
             sharedUpdaters = [[NSMutableDictionary alloc] init];
         [sharedUpdaters setObject:self forKey:[NSValue valueWithNonretainedObject:bundle]];
@@ -126,6 +128,15 @@ static NSString * const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefault
 		[delegate updaterDidShowModalAlert: self];
 }
 
+- (void)setQuiet:(BOOL)q
+{
+    _quiet = q;
+}
+
+- (BOOL)isQuiet
+{
+    return _quiet;
+}
 
 - (void)startUpdateCycle
 {
@@ -283,6 +294,8 @@ static NSString * const SUUpdaterDefaultsObservationContext = @"SUUpdaterDefault
 	//	Wouldn't want to annoy users on dial-up by establishing a connection every
 	//	hour or so:
 	SUUpdateDriver *	theUpdateDriver = [[[([self automaticallyDownloadsUpdates] ? [SUAutomaticUpdateDriver class] : [SUScheduledUpdateDriver class]) alloc] initWithUpdater:self] autorelease];
+    
+    [theUpdateDriver setQuiet:_quiet];
 	
 	[NSThread detachNewThreadSelector: @selector(checkForUpdatesInBgReachabilityCheckWithDriver:) toTarget: self withObject: theUpdateDriver];
 }
